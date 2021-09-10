@@ -9,12 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <%= stylesheet_link_tag "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload', defer: true %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-green-900">
+    <h1 class="text-center my-8 text-6xl font-bold text-purple-700">Caperto</h1>
+    <div class="w-full flex items-center justify-center">
+      <%= yield %>
+    </div>
   </body>
 </html>

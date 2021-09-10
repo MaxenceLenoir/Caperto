@@ -11,13 +11,11 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-   import "@hotwired/turbo-rails"
-   import "controllers"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
-document.addEventListener('turbo:load', () => {
+document.addEventListener('turbolink:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });

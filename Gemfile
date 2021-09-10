@@ -29,8 +29,6 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'autoprefixer-rails', '10.2.5'
-gem 'simple_form'
-gem "hotwire-rails", "~> 0.1.0"
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -62,3 +60,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "tailwindcss-rails", "~> 0.4.3"
+gem 'turbolinks_render'
