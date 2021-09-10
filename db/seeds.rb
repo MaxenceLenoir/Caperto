@@ -1,7 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'net/http'
+require 'json'
+
+Capital.destroy_all
+
+uri = URI('https://raw.githubusercontent.com/Ginden/capitals/master/europe.json')
+res = Net::HTTP.get_response(uri)
+JSON.parse(res.body).each do |data|
+  Capital.create(
+    name: data["properties"]["capital"],
+    country: data["properties"]["country"],
+    longitude: data["geometry"]["coordinates"][0],
+    latitude: data["geometry"]["coordinates"][1]
+  )
+end
