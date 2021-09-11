@@ -4,4 +4,6 @@
 import { application } from "./application"
 
 import PositionController from "./position_controller"
+import MapController from "./map_controller"
 application.register("position", PositionController)
+application.register("map", MapController)

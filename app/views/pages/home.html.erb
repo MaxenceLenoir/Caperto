@@ -1,6 +1,6 @@
 <div class="bg-white h-full shadow-md rounded px-8 pt-6 pb-8 mb-4">
-  <h2 class="text-center text-lg font-bold">Seach cities closest to you</h2>
   <%= turbo_frame_tag "search" do %>
+  <h2 class="text-center text-lg font-bold">Seach cities closest to you</h2>
     <%= form_for @search, url: result_path, html: { class: "flex flex-col" } do |f| %>
       <div data-controller="position">
         <%= f.label :latitude, "latitude", class: "block text-gray-700 text-sm font-bold mb-1 mt-3" %>

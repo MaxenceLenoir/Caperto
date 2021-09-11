@@ -26,5 +26,13 @@
     <div class="border-t-4 flex">
       <%= link_to "<-  Back", root_path, class: "font-bold hover:opacity-50 align-end mt-5" %>
     </div>
+    <div data-controller="map">
+      <div id="map" data-map-target="map"
+          class="hidden"
+          style="width: 100%; height: 600px;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= Rails.application.credentials.mapbox %>">
+      </div>
+    </div>
   <% end %>
 </div>

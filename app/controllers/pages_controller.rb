@@ -25,6 +25,13 @@ class PagesController < ApplicationController
       @capitals_under_radius << { capital: capital, distance: distance.round(2) } if distance < params[:radius].to_f
     end
     @capitals_under_radius.sort_by! { |data| data[:distance] }
+
+    @markers = @capitals_under_radius.map do |cap|
+      {
+        lat: cap[:capital].latitude,
+        lng: cap[:capital].longitude
+      }
+    end
   end
 
   private
