@@ -1,28 +1,30 @@
 <div class="bg-white h-full shadow-md rounded px-8 pt-6 pb-8 mb-4">
-  <h2 class="text-center text-lg font-bold">Result</h2>
-  <% if @capitals_under_radius.empty? %>
-    <div class="my-5">Oups, we can't find any cities ...</div>
-  <% else %>
-    <table class="table-auto mb-5">
-      <thead>
-      <tr>
-        <th>Capital</th>
-        <th>Country</th>
-        <th>Distance</th>
-      </tr>
-      </thead>
-      <tbody>
-        <% @capitals_under_radius.each do |capital| %>
-          <tr>
-            <td class="px-4 text-center"><%= capital[:capital].name %></td>
-            <td class="px-4 text-center"><%= capital[:capital].country %></td>
-            <td class="px-4 text-center"><%= capital[:distance]%>km</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <%= turbo_frame_tag "search" do %>
+    <h2 class="text-center text-lg font-bold">Result</h2>
+    <% if @capitals_under_radius.empty? %>
+      <div class="my-5">Oups, we can't find any cities ...</div>
+    <% else %>
+      <table class="table-auto mb-5">
+        <thead>
+        <tr>
+          <th>Capital</th>
+          <th>Country</th>
+          <th>Distance</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @capitals_under_radius.each do |capital| %>
+            <tr>
+              <td class="px-4 text-center"><%= capital[:capital].name %></td>
+              <td class="px-4 text-center"><%= capital[:capital].country %></td>
+              <td class="px-4 text-center"><%= capital[:distance]%>km</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <div class="border-t-4 flex">
+      <%= link_to "<-  Back", root_path, class: "font-bold hover:opacity-50 align-end mt-5" %>
+    </div>
   <% end %>
-  <div class="border-t-4 flex">
-    <%= link_to "<-  Back", root_path, class: "font-bold hover:opacity-50 align-end mt-5" %>
-  </div>
 </div>
