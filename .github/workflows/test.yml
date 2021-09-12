@@ -8,6 +8,7 @@ jobs:
     env:
       RAILS_ENV: test
       NODE_ENV: test
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres
