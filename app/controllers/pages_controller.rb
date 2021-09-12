@@ -14,23 +14,13 @@ class PagesController < ApplicationController
 
   def result
     @capitals = Capital.all.to_a
-    @capitals.each do |capital|
-      capital.distance = CoordinateCalculator.new(
-        latitude_start: params[:latitude].to_f,
-        longitude_start: params[:longitude].to_f,
-        latitude_end: capital.latitude,
-        longitude_end: capital.longitude
-      ).distance.round(2)
+    @capitals.filter! do |capital|
+      capital.distance_calculated = capital.distance(lat_end: params[:latitude].to_f, long_end: params[:longitude].to_f)
+      capital.distance_calculated <= params[:radius].to_f.round(2)
     end
-    @capitals.filter! { |capital| capital.distance <= params[:radius].to_f.round(2) }
-    @capitals.sort_by!(&:distance)
+    @capitals.sort_by!(&:distance_calculated)
 
-    @markers = @capitals.map do |capital|
-      {
-        lat: capital.latitude,
-        lng: capital.longitude
-      }
-    end
+    @markers = @capitals.map { |capital| { lat: capital.latitude, lng: capital.longitude } }
   end
 
   private
