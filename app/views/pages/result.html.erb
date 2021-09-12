@@ -1,23 +1,23 @@
 <div class="bg-white h-full shadow-md rounded px-8 pt-6 pb-8 mb-4">
   <%= turbo_frame_tag "search" do %>
-    <h2 class="text-center text-lg font-bold">Result</h2>
-    <% if @capitals_under_radius.empty? %>
+    <h2 class="text-center text-lg font-bold text-xl mb-3">Results</h2>
+    <% if @capitals.empty? %>
       <div class="my-5">Oups, we can't find any cities ...</div>
     <% else %>
       <table class="table-auto mb-5">
         <thead>
-        <tr>
-          <th>Capital</th>
-          <th>Country</th>
-          <th>Distance</th>
-        </tr>
+          <tr>
+            <th>Capital</th>
+            <th>Country</th>
+            <th>Distance</th>
+          </tr>
         </thead>
         <tbody>
-          <% @capitals_under_radius.each do |capital| %>
-            <tr>
-              <td class="px-4 text-center"><%= capital[:capital].name %></td>
-              <td class="px-4 text-center"><%= capital[:capital].country %></td>
-              <td class="px-4 text-center"><%= capital[:distance]%>km</td>
+          <% @capitals.each do |capital| %>
+            <tr class="capital">
+              <td class="px-4 text-center"><%= capital.name %></td>
+              <td class="px-4 text-center"><%= capital.country %></td>
+              <td class="px-4 text-center"><%= capital.distance%>km</td>
             </tr>
           <% end %>
         </tbody>
@@ -26,7 +26,8 @@
     <div class="border-t-4 flex">
       <%= link_to "<-  Back", root_path, class: "font-bold hover:opacity-50 align-end mt-5" %>
     </div>
-    <div data-controller="map">
+    <div data-controller="map" class="flex flex-col items-center">
+      <button data-map-target="button" data-action="click->map#toggle" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded my-3 w-32">Display Map</button>
       <div id="map" data-map-target="map"
           class="hidden"
           style="width: 100%; height: 600px;"

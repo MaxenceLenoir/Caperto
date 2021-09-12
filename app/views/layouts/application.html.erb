@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="min-h-screen" style="background-image: url(<%= image_path('wave.svg') %>); background-position: center; background-size: cover;">
   <head>
     <title>Caperto</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,7 +14,7 @@
     <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload', defer: true %>
   </head>
 
-  <body class="bg-green-900">
+  <body>
     <h1 class="text-center my-8 text-6xl font-bold text-purple-700">Caperto</h1>
     <div class="w-full flex items-center justify-center">
       <%= yield %>

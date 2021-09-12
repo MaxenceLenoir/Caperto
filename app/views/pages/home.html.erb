@@ -1,23 +1,23 @@
 <div class="bg-white h-full shadow-md rounded px-8 pt-6 pb-8 mb-4">
   <%= turbo_frame_tag "search" do %>
-  <h2 class="text-center text-lg font-bold">Seach cities closest to you</h2>
-    <%= form_for @search, url: result_path, html: { class: "flex flex-col" } do |f| %>
+  <h2 class="text-center text-lg font-bold mb-3 text-xl">Seach cities closest to you</h2>
+    <%= form_for @search, url: search_path, html: { class: "flex flex-col" } do |f| %>
       <div data-controller="position">
         <%= f.label :latitude, "latitude", class: "block text-gray-700 text-sm font-bold mb-1 mt-3" %>
-        <%= f.number_field :latitude, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", data: { "position-target" => "latitude" } %> 
+        <%= f.number_field :latitude, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", data: { "position-target" => "latitude" }, placeholder: "48" %> 
         <% if @search.errors[:latitude] .present? %>
           <p class="text-red-500 text-xs italic"><%= @search.errors[:latitude].join(' / ') %></p>
         <% end %>
         
         <%= f.label :longitude, "longitude",class: "block text-gray-700 text-sm font-bold mb-1 mt-3" %>
-        <%= f.number_field :longitude, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", data: { "position-target" => "longitude" } %>
+        <%= f.number_field :longitude, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", data: { "position-target" => "longitude" }, placeholder: "-1" %>
         <% if @search.errors[:longitude] .present? %>
           <p class="text-red-500 text-xs italic"><%= @search.errors[:longitude].join(' / ') %></p>
         <% end %>
       </div>
       
       <%= f.label :radius, "radius",class: "block text-gray-700 text-sm font-bold mb-1 mt-3" %>
-      <%= f.number_field :radius, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      <%= f.number_field :radius, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "600" %>
       <% if @search.errors[:radius] .present? %>
         <p class="text-red-500 text-xs italic"><%= @search.errors[:radius].join(' / ') %></p>
       <% end %>

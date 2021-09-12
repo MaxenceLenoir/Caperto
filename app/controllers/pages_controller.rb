@@ -3,7 +3,7 @@ class PagesController < ApplicationController
     @search = Search.new
   end
 
-  def create
+  def search
     @search = Search.new(params_search)
     if @search.valid?
       redirect_to result_path(latitude: @search.latitude, longitude: @search.longitude, radius: @search.radius,)
@@ -13,23 +13,22 @@ class PagesController < ApplicationController
   end
 
   def result
-    capitals = Capital.all
-    @capitals_under_radius = []
-    capitals.each do |capital|
-      distance = CoordinateCalculator.new(
+    @capitals = Capital.all.to_a
+    @capitals.each do |capital|
+      capital.distance = CoordinateCalculator.new(
         latitude_start: params[:latitude].to_f,
         longitude_start: params[:longitude].to_f,
         latitude_end: capital.latitude,
         longitude_end: capital.longitude
-      ).distance
-      @capitals_under_radius << { capital: capital, distance: distance.round(2) } if distance < params[:radius].to_f
+      ).distance.round(2)
     end
-    @capitals_under_radius.sort_by! { |data| data[:distance] }
+    @capitals.filter! { |capital| capital.distance <= params[:radius].to_f.round(2) }
+    @capitals.sort_by!(&:distance)
 
-    @markers = @capitals_under_radius.map do |cap|
+    @markers = @capitals.map do |capital|
       {
-        lat: cap[:capital].latitude,
-        lng: cap[:capital].longitude
+        lat: capital.latitude,
+        lng: capital.longitude
       }
     end
   end

@@ -3,13 +3,12 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default class extends Controller {
-  static targets = ["map"]
+  static targets = ["map", "button"]
 
   connect() {
     const markers = JSON.parse(this.mapTarget.dataset.markers);
     if (markers.length > 0) {
       mapboxgl.accessToken = this.mapTarget.dataset.mapboxApiKey;
-      this.mapTarget.classList.remove('hidden')
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v10'
@@ -24,6 +23,18 @@ export default class extends Controller {
       map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
     } else {
       this.mapTarget.insertAdjacentHTML('afterend', 'No result, no map !')
+      this.buttonTarget.classList.add('hidden')
     }
+  }
+
+  toggle() {
+    if (this.mapTarget.classList.contains('hidden')) {
+      this.mapTarget.classList.remove('hidden')
+      this.buttonTarget.innerText = 'Hide'
+    } else {
+      this.mapTarget.classList.add('hidden')
+      this.buttonTarget.innerText = 'Display Map'
+    }
+
   }
 }

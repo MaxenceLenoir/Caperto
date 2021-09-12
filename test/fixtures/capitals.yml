@@ -1,0 +1,11 @@
+paris:
+  name: "Paris"
+  country: "France"
+  latitude: 48.86
+  longitude: 2.33
+
+madrid:
+  name: "Madrid"
+  country: "Spain"
+  latitude: 40.41
+  longitude: -3.70

@@ -1,10 +1,9 @@
 require "test_helper"
 
-class CapitalTest < ActiveSupport::TestCase
+class SearchTest < ActiveSupport::TestCase
   context 'validations' do
-    should validate_presence_of(:name)
-
-    should validate_presence_of(:country)
+    should validate_presence_of(:radius)
+    should validate_numericality_of(:radius)
 
     should validate_presence_of(:latitude)
     should validate_numericality_of(:latitude)
